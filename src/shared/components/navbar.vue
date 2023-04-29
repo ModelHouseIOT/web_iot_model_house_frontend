@@ -1,6 +1,6 @@
 <template>
 
-  <nav class="navbar" @scroll>
+  <nav class="navbar">
       <ul>
           <li class="navbar-link">
               <router-link to="/home">Home</router-link>
