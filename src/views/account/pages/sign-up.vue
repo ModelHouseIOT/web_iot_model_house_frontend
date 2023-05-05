@@ -1,0 +1,185 @@
+<template>
+    <section class="section-title-sign-up">
+        <h1 class="title-of-sign-up">Model House</h1>
+    </section>
+    <section class="section-sign-up">
+        <h1>Sign Up</h1>
+    </section>
+
+    <div class="form">
+        <div class="email">
+                <label for="email">Email Address</label>
+                <InputText id="email" v-model="emailAddress" aria-describedby="email-help" :class="{ 'is-invalid': !isEmailValid }"/>
+                <div v-if="!isEmailValid" class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="password">
+            <label for="password">Password</label>
+            <InputText id="password" v-model="password"
+                       aria-describedby="password-help" type="password"
+                       :class="{'is-invalid': !passwordValid}" @input="validatePasswords"/>
+            <div v-if="password && !passwordValid" class="invalid-feedback">
+                At least 2 special characters and 8 characters</div>
+        </div>
+        <div class="confirm-password">
+            <label for="confirm_password">Confirm Password</label>
+            <InputText id="confirm_password" v-model="confirm_password"
+                       aria-describedby="confirm-password-help" type="password"
+                       :class="{'is-invalid': !confirmPasswordValid}" @input="validatePasswords"/>
+            <div v-if="!passwordsMatch" class="invalid-feedback">Passwords do not match</div>
+        </div>
+        <div class="text-down">
+            <div style="font-size: 12px;">
+                you are agreeing to our <b><u style="cursor: pointer;">privacy policy</u></b>
+                and <b><u style="cursor: pointer;">terms of service.</u></b></div>
+        </div>
+        <div @click="registerUser">
+            <Button label="REGISTER" style="background-color: #02AA8B;
+              border-color: #02AA8B; width: 400px;"/>
+        </div>
+    </div>
+</template>
+<script>
+import {UserRegisterService} from "@/views/account/service/userRegister.service";
+
+export default {
+    name: "project",
+    data() {
+        return {
+            emailAddress: null,
+            password: null,
+            confirm_password: null,
+            userService: null,
+            passwordValid: false,
+            confirmPasswordValid: false,
+        }
+    },
+    created() {
+        this.userService = new UserRegisterService();
+    },
+    computed: {
+        isEmailValid() {
+            // Email validation regex
+            const regex = /^[^\s@]+@[^\s@]+.[^\s@]+$/;
+            return regex.test(this.emailAddress);
+        },
+        passwordsMatch() {
+            return this.password === this.confirm_password;
+        },
+    },
+    methods: {
+        registerUser(){
+            if (this.password == this.confirm_password){
+                this.userService.register({
+                    "emailAddress": this.emailAddress,
+                    "password":  this.password
+                })
+                console.log("user register succeed");
+                this.$router.push({
+                    name: "home"
+                })
+            }
+            else{
+                console.log("user register failed");
+                return;
+            }
+        },
+        validatePasswords() {
+            const passwordRegex = /^(?=.[!@#$%^&])(?=.{8,})/;
+            this.passwordValid = passwordRegex.test(this.password);
+            this.confirmPasswordValid = this.passwordValid && this.passwordsMatch;
+        },
+    },
+    watch: {
+        password() {
+            this.validatePasswords();
+        },
+        confirmPassword() {
+            this.validatePasswords();
+        },
+    },
+}
+</script>
+<style scoped>
+.is-invalid {
+    border-color: red;
+}
+.invalid-feedback {
+    color: red;
+    font-size: 0.8rem;
+}
+h1{
+    font-size: 38px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 144px;
+    padding: 0;
+    margin: 10px;
+}
+.title-of-sign-up{
+    font-size: 60px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 144px;
+    padding: 0;
+}
+
+.section-title-sign-up{
+    display: flex;
+    justify-content: center;
+    text-transform: capitalize;
+    position:  relative;
+    top: 80px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.section-sign-up{
+    display: flex;
+    justify-content: center;
+    text-transform: capitalize;
+    position:  relative;
+    top: 5px;
+    margin: 0 auto;
+    width: 50%;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+label{
+    display: block;
+    padding: 0 0 10px 0;
+}
+.mail{
+    position: relative;
+    padding: 5px 0;
+    margin: 35px 20px 5px 20px;
+}
+
+.password{
+    position: relative;
+    padding: 5px 0;
+    margin: 5px 20px ;
+}
+.confirm-password{
+    position: relative;
+    padding: 5px 0;
+    margin: 5px 20px ;
+
+}
+.text-down{
+    position: relative;
+    padding: 5px 0;
+    margin: 5px 20px ;
+}
+
+#email, #password, #confirm_password{
+    width: 400px;
+}
+
+</style>
