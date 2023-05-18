@@ -8,10 +8,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "primeicons": "^6.0.1",
     "primevue": "^3.26.1",
+    "vee-validate": "^4.8.6",
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
