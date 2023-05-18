@@ -39,7 +39,7 @@
     </div>
 </template>
 <script>
-import {UserRegisterService} from "@/views/account/service/userRegister.service";
+import {UserRegisterService} from "@/views/account/service/user-register.service";
 
 export default {
     name: "project",

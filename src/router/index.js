@@ -46,7 +46,7 @@ const router = createRouter({
             component: remodeler,
         },
         {
-            path:"/detail",
+            path:"/detail/:id",
             name:"detail",
             component:detail,
         }

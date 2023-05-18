@@ -33,7 +33,7 @@
 </template>
 <script>
 import {defineComponent} from 'vue'
-import {UserSignInService} from "@/views/account/service/userSignIn.service";
+import {UserSignInService} from "@/views/account/service/user-sign-in.service";
 export default defineComponent({
     name: "sign-in",
     data() {

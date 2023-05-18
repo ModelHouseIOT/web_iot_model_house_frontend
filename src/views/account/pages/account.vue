@@ -5,8 +5,6 @@ export default {
 }
 
 </script>
-
-
 <template>
   <section>
       <router-link to="/sign-in">
