@@ -28,9 +28,11 @@
             <div v-if="!passwordsMatch" class="invalid-feedback">Passwords do not match</div>
         </div>
         <div class="text-down">
-            <div style="font-size: 12px;">
-                you are agreeing to our <b><u style="cursor: pointer;">privacy policy</u></b>
-                and <b><u style="cursor: pointer;">terms of service.</u></b></div>
+          <div style="font-size: 12px;">
+            you are agreeing to our <a href="https://www.termsfeed.com/live/080d7040-ea41-438c-98a1-3f5c5eeb95f0"
+                                       target="_blank"><b><u style="cursor: pointer;">privacy policy</u></b></a>
+            and <a href="https://www.termsfeed.com/live/a0ae1603-599a-4452-b149-e7c7223c77ae"
+                   target="_blank"><b><u style="cursor: pointer;">terms of service.</u></b></a></div>
         </div>
         <div @click="registerUser">
             <Button label="REGISTER" style="background-color: #02AA8B;

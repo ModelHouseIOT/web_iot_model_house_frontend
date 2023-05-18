@@ -18,6 +18,7 @@ import FileUpload from 'primevue/fileupload';
 import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Paginator from 'primevue/paginator';
+import Galleria from 'primevue/galleria';
 
 const app = createApp(App);
 app.use(router);
@@ -33,6 +34,7 @@ app.component('FileUpload',FileUpload);
 app.component('InputNumber',InputNumber);
 app.component('Textarea', Textarea);
 app.component('Paginator', Paginator);
+app.component('Galleria', Galleria);
 
 app.mount('#app');
 
