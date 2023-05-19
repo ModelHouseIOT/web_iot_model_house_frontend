@@ -35,7 +35,7 @@
 </template>
 <script>
 import {defineComponent} from 'vue'
-import {UserSignInService} from "@/views/account/service/user-sign-in.service";
+import {UserSignInService} from "@/identity-and-access-management/service/user-sign-in.service";
 export default defineComponent({
     name: "sign-in",
     data() {
