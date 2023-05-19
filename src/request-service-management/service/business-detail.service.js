@@ -1,6 +1,6 @@
-import http from "@/core/services/http-common";
+import http from "@/shared/services/http-common";
 
-export class BusinessService{
+export class BusinessDetailService {
     getBusinessByID(id){
         return http.get(`/businessprofile/account/${id}`);
     }

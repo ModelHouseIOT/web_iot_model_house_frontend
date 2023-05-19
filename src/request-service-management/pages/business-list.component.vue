@@ -32,7 +32,7 @@
 </template>
 <script>
 import {defineComponent} from 'vue'
-import {SearchBusinessService} from "@/views/remodeler/service/search-business.service";
+import {BusinessListService} from "@/request-service-management/service/business-list.service";
 import { ref } from 'vue';
 
 export default defineComponent({
@@ -46,7 +46,7 @@ export default defineComponent({
         }
     },
     created(){
-        this.searchService = new SearchBusinessService();
+        this.searchService = new BusinessListService();
         this.searchService.searchRemodeler().then(res=>{
             this.businesses = res.data;
             console.log(res.data);

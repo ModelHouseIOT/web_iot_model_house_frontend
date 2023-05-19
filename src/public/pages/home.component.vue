@@ -2,7 +2,7 @@
     <section class="introduction">
         <div class="containerB">
             <div class="boxB col1">
-                <img src="src/assets/banner.png" class="imgBanner" alt="Remodeling a house view on a laptop">
+                <img src="../../assets/banner.png" class="imgBanner" alt="Remodeling a house view on a laptop">
             </div>
             <div class="boxC col2">
                 <h1>Have a comfortable <span class="green">live!</span> </h1>

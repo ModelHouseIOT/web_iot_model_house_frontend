@@ -39,7 +39,7 @@
                 <img :src="slotProps.item.thumbnailImageSrc" :alt="slotProps.item.alt" style="display: block; width: 150px; height:100px;" />
               </template>
               <template #caption="slotProps">
-                <span class="text-xl mb-2 font-bold">{{ slotProps.item.title }}</span>
+                <span class="text-xl mb-2 font-bold" style="justify-content: center;">{{ slotProps.item.title }}</span>
                 <div @click="signInUser">
                   <Button label="READ MORE" style="background-color: #02AA8B;
                   border-color: #02AA8B; padding: 8px; margin-top: 30px;"/>
@@ -55,7 +55,7 @@
 </template>
 <script>
 import {defineComponent, ref} from 'vue'
-import {BusinessService} from "@/views/detail/service/business.service";
+import {BusinessDetailService} from "@/request-service-management/service/business-detail.service";
 
 export default defineComponent({
   name: "detail",
@@ -91,7 +91,7 @@ export default defineComponent({
         numVisible: 1
       }
     ]);
-    this.businessService = new BusinessService();
+    this.businessService = new BusinessDetailService();
     this.businessService.getBusinessByID(this.$route.params.id).then(res=>{
       this.business = res.data;
       console.log(res.data);

@@ -3,7 +3,7 @@
         <nav class="navbar">
             <div class="logo">
                 <router-link to="/home">
-                    <img src="@/assets/ModelHouseOfficialLogo.png" style="height: 50px;" alt="ModelHouse logo"/>
+                    <img src="../../assets/ModelHouseOfficialLogo.png" style="height: 50px;" alt="ModelHouse logo"/>
                 </router-link>
             </div>
             <ul>

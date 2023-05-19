@@ -1,12 +1,12 @@
 
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/views/home/pages/home.vue";
-import Account from "@/views/account/pages/account.vue";
-import signUp from "@/views/account/pages/sign-up.vue";
+import Home from "@/public/pages/home.component.vue";
+import Account from "@/identity-and-access-management/pages/account.component.vue";
+import signUp from "@/identity-and-access-management/pages/sign-up.component.vue";
 import project from "@/views/project/pages/project.vue";
-import remodeler from "@/views/remodeler/pages/remodeler.vue";
-import detail from "@/views/detail/pages/detail.vue";
-import signIn from "@/views/account/pages/sign-in.vue";
+import remodeler from "@/request-service-management/pages/business-list.component.vue";
+import detail from "@/request-service-management/pages/business-detail.component.vue";
+import signIn from "@/identity-and-access-management/pages/sign-in.component.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),

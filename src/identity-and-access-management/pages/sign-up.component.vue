@@ -41,7 +41,7 @@
     </div>
 </template>
 <script>
-import {UserRegisterService} from "@/views/account/service/user-register.service";
+import {UserSignUpService} from "@/identity-and-access-management/service/user-sign-up.service";
 
 export default {
     name: "project",
@@ -56,7 +56,7 @@ export default {
         }
     },
     created() {
-        this.userService = new UserRegisterService();
+        this.userService = new UserSignUpService();
     },
     computed: {
         isEmailValid() {
