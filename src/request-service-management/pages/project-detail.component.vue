@@ -2,7 +2,7 @@
   import {ProjectListService} from "@/request-service-management/service/project-list.service";
   import ProjectManager from "@/public/components/project-manager.component.vue";
   import TechnicalSpecifications from "@/public/components/technical-specifications.component.vue";
-  import {onMounted, ref} from "vue";
+  import {ref} from "vue";
 
   export default{
     name: "ProjectDetail",
