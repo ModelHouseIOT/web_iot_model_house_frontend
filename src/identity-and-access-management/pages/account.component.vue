@@ -13,7 +13,6 @@ export default {
       <router-link to="/sign-up">
           <div class="sign-up-btn">sign up</div>
       </router-link>
-
   </section>
 </template>
 
@@ -27,10 +26,10 @@ section{
     background-size: cover;
     min-height: 700px;
     width: 100%;
+    height: 100%;
     display: grid;
     place-items: center;
     grid-template-columns: repeat(2, 1fr);
-
 }
 .sign-in-btn{
   background-color: #02AA8B;

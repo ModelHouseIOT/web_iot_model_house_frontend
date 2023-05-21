@@ -20,7 +20,7 @@
                   <Rating style="margin-top: 50px;" v-model="value" :cancel="false" :model-value="3" readonly/>
               </template>
               <template #footer >
-                <Button @click="addToCart" icon="pi pi-shopping-cart" label="Add To Cart"
+                <Button @click="addToCart" icon="pi pi-send" label="Send Request"
                         style="background-color:#02AA8B; border-color: #02AA8B;"/>
                 <Button @click="goIntoDetails(business.accountId)" icon="pi pi-caret-right" label="See More"
                         style="background-color:#004A63; border-color: #004A63;

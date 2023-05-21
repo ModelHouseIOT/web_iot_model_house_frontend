@@ -19,6 +19,7 @@ import InputNumber from 'primevue/inputnumber';
 import Textarea from 'primevue/textarea';
 import Paginator from 'primevue/paginator';
 import Galleria from 'primevue/galleria';
+import Rating from "primevue/rating";
 
 const app = createApp(App);
 app.use(router);
@@ -35,6 +36,7 @@ app.component('InputNumber',InputNumber);
 app.component('Textarea', Textarea);
 app.component('Paginator', Paginator);
 app.component('Galleria', Galleria);
+app.component('Rating', Rating);
 
 app.mount('#app');
 
