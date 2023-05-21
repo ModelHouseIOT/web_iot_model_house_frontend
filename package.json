@@ -5,10 +5,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fake-api": "json-server --watch server/db.json --routes server/routes.json --port 3000"
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primevue": "^3.26.1",
     "vee-validate": "^4.8.6",

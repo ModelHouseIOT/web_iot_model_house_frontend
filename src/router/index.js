@@ -7,6 +7,7 @@ import project from "@/views/project/pages/project.vue";
 import remodeler from "@/request-service-management/pages/business-list.component.vue";
 import detail from "@/request-service-management/pages/business-detail.component.vue";
 import signIn from "@/identity-and-access-management/pages/sign-in.component.vue";
+import ProjectDetail from "@/request-service-management/pages/project-detail.component.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -49,6 +50,11 @@ const router = createRouter({
             path:"/detail/:id",
             name:"detail",
             component:detail,
+        },
+        {
+            path:"/detail/:id/project-detail/:projectId",
+            name:"project-detail",
+            component: ProjectDetail,
         }
 
     ],
