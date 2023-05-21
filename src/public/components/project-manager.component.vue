@@ -35,6 +35,10 @@
       <div class="sidebar">
         <div>
           <p>{{projects.projectManager.description}}</p>
+          <Button @click="sendRequest" icon="pi pi-send" label="Send Request"
+                  style="background-color:#02AA8B; border-color: #02AA8B;
+                  position: absolute; bottom: 10px; right: 30px;
+                  width: 200px; height: 70px; font-size: 20px;"/>
         </div>
       </div>
     </div>
