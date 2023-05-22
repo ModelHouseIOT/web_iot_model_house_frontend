@@ -36,11 +36,12 @@
 <script>
 import {defineComponent} from 'vue'
 import {UserSignInService} from "@/identity-and-access-management/service/user-sign-in.service";
+import { formToJSON } from 'axios';
 export default defineComponent({
     name: "sign-in",
     data() {
         return {
-            emailAddress: true,
+            emailAddress: null,
             password: null,
             userService: null,
         }
@@ -66,14 +67,16 @@ export default defineComponent({
                 "password":  this.password
             }).then(res=>{
                 console.log("user sign in succeeded", res.data);
-                res.data.role === "Business" ? localStorage.setItem("isBusinessLoggedIn", 'true'):
-                    localStorage.setItem("isBusinessLoggedIn", 'false');
+                localStorage.setItem("account",JSON.stringify(res.data));
+                //res.data.role === "Business" ? localStorage.setItem("isBusinessLoggedIn", 'true'):
+                //    localStorage.setItem("isBusinessLoggedIn", 'false');
                 this.redirectToHome();
             }).catch(err=>{
                 console.log("user sign in failed", err);
             })
         },
-        redirectToHome(){
+        redirectToHome() {
+            console.log(`Bearer ${JSON.parse(localStorage.getItem("account")).token}`)
             this.$router.push('/home');
         }
     },

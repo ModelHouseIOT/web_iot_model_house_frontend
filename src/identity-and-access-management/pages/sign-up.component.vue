@@ -69,21 +69,18 @@ export default {
         },
     },
     methods: {
-        registerUser(){
-            if (this.password == this.confirm_password){
+        registerUser() {
+            this.password == this.confirm_password ?
                 this.userService.register({
                     "emailAddress": this.emailAddress,
                     "password":  this.password
+                }).then(res => {
+                    console.log("user register succeed" , res.data);
+                    this.$router.push({
+                        name: "sign-in"
+                    })
                 })
-                console.log("user register succeed");
-                this.$router.push({
-                    name: "home"
-                })
-            }
-            else{
-                console.log("user register failed");
-                return;
-            }
+                : null;
         },
         validatePasswords() {
             const passwordRegex = /^(?=.[!@#$%^&])(?=.{8,})/;
