@@ -10,7 +10,7 @@
                 <li class="navbar-link">
                     <router-link to="/remodeler">Find Remodeler</router-link>
                 </li>
-                <li v-if="this.isBusinessLoggedIn" class="navbar-link">
+                <li class="navbar-link">
                     <router-link to="/project">Your publish</router-link>
                 </li>
                 <li class="navbar-link">
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+
 export default {
     name: "navbar",
     data() {
@@ -52,8 +53,9 @@ export default {
     },
     methods:{
         signOut() {
-            localStorage.removeItem("account");
-            location.reload();
+          localStorage.removeItem("account");
+          this.$router.push('/home');
+          setInterval("location.reload()", 50);
         }
     },
     mounted() {
