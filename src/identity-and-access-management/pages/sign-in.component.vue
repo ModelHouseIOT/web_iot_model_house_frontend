@@ -68,9 +68,8 @@ export default defineComponent({
             }).then(res=>{
                 console.log("user sign in succeeded", res.data);
                 localStorage.setItem("account",JSON.stringify(res.data));
-                //res.data.role === "Business" ? localStorage.setItem("isBusinessLoggedIn", 'true'):
-                //    localStorage.setItem("isBusinessLoggedIn", 'false');
                 this.redirectToHome();
+                setInterval("location.reload()", 100);
             }).catch(err=>{
                 console.log("user sign in failed", err);
             })
