@@ -23,10 +23,13 @@
                         <i class="pi pi-shopping-cart" style="color: #708090"></i>
                     </router-link>
                 </li>
-                <li class="navbar-link">
+                <li class="navbar-link" v-if='!this.account' >
                     <router-link to="/account">
                         <i class="pi pi-user" style="color: #708090"></i>
                     </router-link>
+                </li>
+                <li class="navbar-link sign-out" v-if='this.account' @click="signOut()">
+                    <i class="pi pi-sign-out" style="color: #708090"></i>
                 </li>
             </ul>
         </nav>
@@ -40,14 +43,18 @@ export default {
     name: "navbar",
     data() {
         return {
-            isBusinessLoggedIn: false
+            account: false
         }
     },
     created() {
-        this.isBusinessLoggedIn = localStorage.getItem("isBusinessLoggedIn") == 'true';
-        console.log(this.isBusinessLoggedIn);
+        localStorage.getItem("account") ? this.account = localStorage.getItem("account"): null;
+        console.log(this.account);
     },
     methods:{
+        signOut() {
+            localStorage.removeItem("account");
+            location.reload();
+        }
     },
     mounted() {
         window.addEventListener("scroll", function (){
@@ -109,6 +116,11 @@ header.down ul li a{
 header .navbar ul li a i{
     position: relative;
     left: 15em;
+}
+.sign-out{
+    position: relative;
+    left: 15em;
+    cursor: pointer;
 }
 .logo{
     position: relative;
