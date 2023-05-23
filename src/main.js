@@ -39,6 +39,7 @@ app.component('Paginator', Paginator);
 app.component('Galleria', Galleria);
 app.component('Rating', Rating);
 app.component('Dialog', Dialog);
+app.component('Textarea', Textarea);
 
 app.mount('#app');
 
