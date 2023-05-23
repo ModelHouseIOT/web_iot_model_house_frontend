@@ -1,6 +1,9 @@
 <script >
+  import RequestForm from "@/request-service-management/pages/request-form.component.vue";
+
   export default{
     name:"ProjectManager",
+    components: {RequestForm},
     props: {
       projects: {
         image: '',
@@ -22,23 +25,23 @@
 <template>
   <div class="box">
     <h1 style="position:relative;
-        margin: 0px 0px 60px 100px; font-size: 50px; text-transform: uppercase;">project manager</h1>
+        margin: 0px 0px 60px 100px; font-size: 40px; text-transform: uppercase;">project manager</h1>
     <h2 style="position:relative;
-        margin: 0px 0px 60px 100px; font-size: 30px;">{{projects.projectManager.name}}</h2>
+        margin: 0px 0px 60px 100px; font-size: 20px;">{{projects.projectManager.name}}</h2>
     <div class="container" style="position:relative;
         margin: 50px; padding: 50px;">
       <div class="content">
         <img :src="projects.projectManager.photo" alt="business logo choose"
-             style="width: 350px; height: 350px;
+             style="width: 300px; height: 350px;
            display: block; margin: 0 auto;" class="photo"/>
       </div>
       <div class="sidebar">
         <div>
           <p>{{projects.projectManager.description}}</p>
-          <Button @click="sendRequest" icon="pi pi-send" label="Send Request"
-                  style="background-color:#02AA8B; border-color: #02AA8B;
-                  position: absolute; bottom: 10px; right: 30px;
-                  width: 200px; height: 70px; font-size: 20px;"/>
+          <div style="
+                    position: absolute; bottom: 10px; right: 30px;">
+                <RequestForm/>
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +68,7 @@
   color: red; /* Cambia el color de las estrellas a rojo */
 }
 p{
-  font-size: 25px;
+  font-size: 14px;
   text-align: justify;
   line-height: 2.5;
   margin: 0;

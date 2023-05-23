@@ -74,9 +74,9 @@
 <template>
 
   <div>
-    <img :src="this.projects.image" alt="project image" style="width: 100%; height: 800px;">
-    <div style="position: relative; bottom: 250px; left: 100px;
-    font-size: 30px; color: white; text-transform: uppercase;
+    <img :src="this.projects.image" alt="project image" style="width: 100%; height: 500px;">
+    <div style="position: relative; bottom: 150px; left: 100px;
+    font-size: 20px; color: white; text-transform: uppercase;
     word-spacing: 5px; font-weight: bolder;
     background-color: #004A63; width: 50%; padding: 15px;">{{this.projects.title}}</div>
   </div>
@@ -85,12 +85,12 @@
   <TechnicalSpecifications :projects="this.projects"/>
   <div class="container">
     <h1 style="position:relative;
-        margin: 70px 0px 60px 100px; font-size: 50px; text-transform: uppercase;">gallery</h1>
+        margin: 70px 0px 60px 100px; font-size: 40px; text-transform: uppercase;">gallery</h1>
     <div class="card flex justify-content-center" style="margin: 80px;">
       <Galleria v-model:activeIndex="activeIndex" v-model:visible="displayCustom" :value="projects.gallery" :responsiveOptions="responsiveOptions" :numVisible="7"
                 :circular="true" :fullScreen="true" :showItemNavigators="true" :showThumbnails="false">
         <template #item="slotProps">
-          <img :src="slotProps.item" alt="gallery image" style="width: 1000px; display: block" />
+          <img :src="slotProps.item" alt="gallery image" style="width: 600px; display: block" />
         </template>
         <template #thumbnail="slotProps">
           <img :src="slotProps.item" alt="gallery image" style="display: block"/>
@@ -99,7 +99,7 @@
 
       <div v-if="projects.gallery" class="box-grid">
         <div v-for="(image, index) of projects.gallery" :key="index" class="img-col">
-          <img :src="image" alt="gallery image" style="cursor: pointer;width: 500px;" @click="imageClick(index)" />
+          <img :src="image" alt="gallery image" style="cursor: pointer;width: 300px;" @click="imageClick(index)" />
         </div>
       </div>
     </div>

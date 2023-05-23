@@ -6,10 +6,9 @@
           <Button icon="pi pi-search" @click="onSearch" />
         </span>
     </section>
-
     <div class="card">
         <div v-for="business in businesses" :key="business.id" class="card-container-area" style="cursor:pointer">
-            <Card style="min-height: 620px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);" id="elevator">
+            <Card style="min-height: 300px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);" id="elevator">
               <template #header>
                 <img :src= "business.image" class="imgArea" alt="Remodeling a particular area of your house">
               </template>
@@ -19,12 +18,13 @@
                 {{business.description}}
                   <Rating style="margin-top: 50px;" v-model="value" :cancel="false" :model-value="3" readonly/>
               </template>
-              <template #footer >
-                <Button @click="addToCart" icon="pi pi-send" label="Send Request"
-                        style="background-color:#02AA8B; border-color: #02AA8B;"/>
-                <Button @click="goIntoDetails(business.accountId)" icon="pi pi-caret-right" label="See More"
-                        style="background-color:#004A63; border-color: #004A63;
-                        margin-left:60px;"/>
+              <template #footer>
+                <div style="text-align: center">
+                  <RequestForm style="padding: 0px; margin: 0px;"/>
+                  <Button class="button" @click="goIntoDetails(business.accountId)" icon="pi pi-caret-right" label="See More"
+                          style="background-color:#004A63; border-color: #004A63;"/>
+                </div>
+
               </template>
             </Card>
         </div>
@@ -34,9 +34,11 @@
 import {defineComponent} from 'vue'
 import {BusinessListService} from "@/request-service-management/service/business-list.service";
 import { ref } from 'vue';
+import RequestForm from "@/request-service-management/pages/request-form.component.vue";
 
 export default defineComponent({
     name: "remodeler",
+  components: {RequestForm},
     data() {
         return {
             searchService: null,
@@ -60,9 +62,6 @@ export default defineComponent({
         goIntoDetails(id){
             this.$router.push("/detail/" + id);
         },
-        addToCart(){
-          this.$router.push(name="sign-up");
-        }
     }
 })
 </script>
@@ -78,10 +77,9 @@ section{
 }
 .card{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     margin-top: 80px;
-    margin-bottom: 100px;
-    max-height: 300px;
+    height: 100px;
 }
 
 .card-container-area{
@@ -93,10 +91,11 @@ section{
 #elevator {
   transition: transform 0.1s ease;
 }
-
 #elevator:hover {
   //transform: translateY(-5px);
   transform: scale(1.03);
 }
-
+.button{
+  margin-left: 10px;
+}
 </style>
