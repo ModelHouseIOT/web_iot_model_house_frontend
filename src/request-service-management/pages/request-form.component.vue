@@ -34,9 +34,6 @@
       },
       onSubmit(){
           if (this.value) {
-            this.value = '';
-            this.visible=false;
-            this.toast.add({severity: 'info', summary: 'Form Submitted', detail: this.value, life: 3000});
             this.requestService.sendRequest(JSON.parse(localStorage.getItem("account")).id, this.businessId, {
               "status": "IN_PROCESS",
               "description": this.value,
@@ -45,6 +42,9 @@
               this.request = res.data;
               console.log(res.data);
             });
+            this.value = '';
+            this.visible=false;
+            this.toast.add({severity: 'info', summary: 'Form Submitted', detail: this.value, life: 3000});
           }
       },
     }

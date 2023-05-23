@@ -2,7 +2,7 @@
   "projects": [
   {
     "projectId": 1,
-    "businessId": 9,
+    "businessId": 1,
     "image": "https://theressa.net/images/projects/5d7edac18901d-ResizerImage3600X1800.jpg",
     "title": "Remodelación y ampliación de una Casa en San Isidro - Lima",
     "projectManager": {
@@ -32,7 +32,7 @@
   },
   {
     "projectId": 2,
-    "businessId": 9,
+    "businessId": 1,
     "image": "https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg",
     "title": "REMODELACIÓN DE COCINA EN LA MOLINA - LIMA",
     "projectManager": {
@@ -56,7 +56,7 @@
   },
   {
     "projectId": 3,
-    "businessId": 9,
+    "businessId": 1,
     "image": "https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_1280.jpg",
     "title": "Remodelación y ampliación de una Casa en San Isidro - Lima",
     "projectManager": {

@@ -20,8 +20,8 @@
               </template>
               <template #footer>
                 <div style="text-align: center">
-                  <RequestForm style="padding: 0px; margin: 0px;" :businessId="business.accountId"/>
-                  <Button class="button" @click="goIntoDetails(business.accountId)" icon="pi pi-caret-right" label="See More"
+                  <RequestForm style="padding: 0px; margin: 0px;" :businessId="business.id"/>
+                  <Button class="button" @click="goIntoDetails(business.id)" icon="pi pi-caret-right" label="See More"
                           style="background-color:#004A63; border-color: #004A63;"/>
                 </div>
 
