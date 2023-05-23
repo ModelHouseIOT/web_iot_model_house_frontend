@@ -34,7 +34,7 @@
 <template>
   <div class="container">
     <h1 style="position:relative;
-        margin: 0px 0px 60px 100px; font-size: 50px; text-transform: uppercase;">technical specifications</h1>
+        margin: 0px 0px 60px 100px; font-size: 40px; text-transform: uppercase;">technical specifications</h1>
     <div style="width: 65%;  margin-left: 100px;">
       <p><b>Project's name: </b> {{projects.title}}</p>
       <p><b>Year of the project: </b> {{projects.technicalSpecifications.year}}</p>
@@ -47,7 +47,6 @@
       <p><b>Team: </b> {{projects.technicalSpecifications.team}}</p>
       <p><b>Interior Design: </b> {{projects.technicalSpecifications.interiorDesign}}</p>
       <p><b># of IOT devices: </b> {{projects.technicalSpecifications.devices}}</p>
-
     </div>
   </div>
 </template>
@@ -59,7 +58,7 @@
   padding: 70px;
 }
 p{
-  font-size: 25px;
+  font-size: 15px;
   line-height: 2.5;
   margin: 0;
 }

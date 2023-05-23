@@ -20,6 +20,7 @@ import Textarea from 'primevue/textarea';
 import Paginator from 'primevue/paginator';
 import Galleria from 'primevue/galleria';
 import Rating from "primevue/rating";
+import Dialog from "primevue/dialog";
 
 const app = createApp(App);
 app.use(router);
@@ -37,6 +38,7 @@ app.component('Textarea', Textarea);
 app.component('Paginator', Paginator);
 app.component('Galleria', Galleria);
 app.component('Rating', Rating);
+app.component('Dialog', Dialog);
 
 app.mount('#app');
 
