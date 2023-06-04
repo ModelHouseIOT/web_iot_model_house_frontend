@@ -72,7 +72,7 @@ export default defineComponent({
                 setInterval("location.reload()", 100);
             }).catch(err=>{
                 console.log("user sign in failed", err);
-            })
+            });
         },
         redirectToHome() {
             console.log(`Bearer ${JSON.parse(localStorage.getItem("account")).token}`)

@@ -24,6 +24,7 @@
         requestTo: '',
         visibleConfirmation: ref(false),
         authorizationDialog: false,
+        sameBusinessDialog: false,
       }
     },
     created() {
@@ -54,9 +55,13 @@
           }
       },
       openDialog(){
+       // console.log(this.businessId, JSON.parse(localStorage.getItem("account")).id)
        if (localStorage.getItem("account") == undefined){
          this.authorizationDialog = true;
        }
+       // else if(this.businessId == JSON.parse(localStorage.getItem("account")).id){
+       //   this.sameBusinessDialog = true;
+       // }
        else{
          this.visible = true;
        }
@@ -75,8 +80,13 @@
       <router-link to="/sign-up" style="text-decoration: none;  color: black;">Sign-Up</router-link>
     </template>
   </Dialog>
+<!--  <Dialog v-model:visible="sameBusinessDialog" modal header="Request Failed" :style="{ width: '20vw' }">-->
+<!--    <template #footer>-->
+<!--      <p>You can't send a request to your own business</p>-->
+<!--    </template>-->
+<!--  </Dialog>-->
     <Dialog v-model:visible="visible" modal :header="this.requestTo" :style="{ width: '50vw'}">
-      <div class="card flex justify-content-center" style="height: 400px;">
+      <div class="card flex justify-content-center" style="height: 400px; margin-top:20px;">
         <form @submit.prevent="visibleConfirmation = true" class="flex flex-column gap-2" :reset="resetForm">
         <span class="p-float-label">
             <Textarea id="value" v-model="value" :class="{ 'p-invalid': errorMessage }"
@@ -84,7 +94,7 @@
                       style="width: 100%; height: 300px;"/>
             <label for="value">Description</label>
         </span>
-          <small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small>
+          <div><small id="text-error" class="p-error">{{ errorMessage || '&nbsp;' }}</small></div>
           <Button type="submit" label="Submit" style="background-color:#02AA8B; border-color: #02AA8B;
             margin-top: 30px; width: 30%;"/>
         </form>

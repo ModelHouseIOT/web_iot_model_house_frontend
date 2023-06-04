@@ -53,7 +53,7 @@ export default defineComponent({
         this.searchService = new BusinessListService();
         this.searchService.searchRemodeler().then(res=>{
             this.businesses = res.data;
-            console.log(res.data);
+            console.log(res.data ,"hola");
         });
         this.value = ref(null);
     },
