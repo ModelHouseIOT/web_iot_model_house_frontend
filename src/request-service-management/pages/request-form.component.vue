@@ -42,7 +42,7 @@
           if (this.value) {
             console.log(JSON.parse(localStorage.getItem("account")).id);
             this.requestService.sendRequest(JSON.parse(localStorage.getItem("account")).id, this.businessId, {
-              "status": "IN_PROCESS",
+              "status": "PENDING",
               "description": this.value,
               "accepted": false
             }).then(res=>{
