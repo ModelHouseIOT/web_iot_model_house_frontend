@@ -2,6 +2,7 @@
 import {RequestService} from "@/request-service-management/service/request.service";
 import {ref} from "vue";
 import {BusinessListService} from "@/request-service-management/service/business-list.service";
+import {AccountService} from "@/request-service-management/service/account-service";
 
 export default {
   name: "Request",
@@ -9,6 +10,7 @@ export default {
     return {
       businessRequest: null,
       businessProfileService: null,
+      accountService: null,
       requestsCompleted: null,
       requestsInProcess: null,
       requestsPending: null,
@@ -17,26 +19,32 @@ export default {
     }
   },
   created() {
+    console.log("hola");
     this.businessRequest = new RequestService();
     this.businessProfileService = new BusinessListService();
+    this.accountService = new AccountService();
     if(JSON.parse(localStorage.getItem("account")).role === "business"){
-      this.businessProfileService.searchBusinessProfile(JSON.parse(localStorage.getItem("account")).id).then(res=>{
-        this.businessId = res.data.id;
-        console.log(res.data);
-        this.businessRequest.getRequestsByBusinessId(res.data.id, "CREATED").then(result=>{
-          this.requestsCompleted = result.data;
-        });
-        this.businessRequest.getRequestsByBusinessId(res.data.id, "IN_PROCESS").then(result=>{
-          this.requestsInProcess = result.data;
-          console.log(this.requestsInProcess);
-        });
-        this.businessRequest.getRequestsByBusinessId(res.data.id, "PENDING").then(result=>{
-          this.requestsPending = result.data;
-        });
-        this.businessRequest.getRequestsByBusinessId(res.data.id, "CANCELED").then(result=> {
+      this.accountService.accountByUserId(JSON.parse(localStorage.getItem("account")).id).then((res)=>{
+        console.log("holli");
+        this.businessProfileService.searchBusinessProfile(res.data.id).then(res=>{
+          this.businessId = res.data.id;
+          console.log(res.data);
+          this.businessRequest.getRequestsByBusinessId(res.data.id, "CREATED").then(result=>{
+            this.requestsCompleted = result.data;
+          });
+          this.businessRequest.getRequestsByBusinessId(res.data.id, "IN_PROCESS").then(result=>{
+            this.requestsInProcess = result.data;
+            console.log(this.requestsInProcess);
+          });
+          this.businessRequest.getRequestsByBusinessId(res.data.id, "PENDING").then(result=>{
             this.requestsPending = result.data;
+            console.log(this.requestsPending);
+          });
+          this.businessRequest.getRequestsByBusinessId(res.data.id, "CANCELED").then(result=> {
+            this.requestsPending = result.data;
+          });
         });
-      });
+      })
     }
   }
 }

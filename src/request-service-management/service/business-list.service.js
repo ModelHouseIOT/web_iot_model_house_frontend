@@ -4,6 +4,6 @@ export class BusinessListService {
         return http.get("/business_profile")
     }
     searchBusinessProfile(businessId){
-        return http.get(`/business_profile/profile/${businessId}`)
+        return http.get(`/account/${businessId}/business_profile`)
     }
 }
