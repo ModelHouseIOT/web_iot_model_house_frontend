@@ -9,7 +9,8 @@ export default {
   name: "Request",
   data(){
     return {
-      businessRequest: null,
+      requestService: null,
+      requestId: null,
       toast: useToast(),
       businessProfileService: null,
       accountService: null,
@@ -23,42 +24,50 @@ export default {
     }
   },
   created() {
-    console.log("hola");
-    this.businessRequest = new RequestService();
     this.businessProfileService = new BusinessListService();
+    this.requestService = new RequestService();
     this.accountService = new AccountService();
     if(JSON.parse(localStorage.getItem("account")).role === "business"){
-      this.accountService.accountByUserId(JSON.parse(localStorage.getItem("account")).id).then((res)=>{
-        console.log("holli");
-        this.businessProfileService.searchBusinessProfile(res.data.id).then(res=>{
-          this.businessId = res.data.id;
-          console.log(res.data);
-          this.businessRequest.getRequestsByBusinessId(res.data.id, "CREATED").then(result=>{
-            this.requestsCompleted = result.data;
-          });
-          this.businessRequest.getRequestsByBusinessId(res.data.id, "IN_PROCESS").then(result=>{
-            this.requestsInProcess = result.data;
-            console.log(this.requestsInProcess);
-          });
-          this.businessRequest.getRequestsByBusinessId(res.data.id, "PENDING").then(result=>{
-            this.requestsPending = result.data;
-            console.log(this.requestsPending);
-          });
-          this.businessRequest.getRequestsByBusinessId(res.data.id, "CANCELED").then(result=> {
-            this.requestsPending = result.data;
-          });
-        });
-      })
+      this.searchRequest();
     }
   },
   methods: {
     onSubmitAccepted() {
+      this.requestService.updateRequest(this.requestId, { "status": "PENDING_PROPOSAL"}).then(result => {
+        console.log(result)
+      })
       this.visibleAccepted = false;
       this.toast.add({ severity: 'success', summary: 'Request Accepted', detail: '', life: 3000 });
     },
     onSubmitReject() {
+      this.requestService.updateRequest(this.requestId, { "status": "CANCELED" }).then(result => {
+        console.log(result)
+      })
       this.visibleReject = false;
       this.toast.add({ severity: 'error', summary: 'Request Reject', detail: '', life: 3000 });
+    },
+    searchRequest() {
+      this.accountService.accountByUserId(JSON.parse(localStorage.getItem("account")).id).then((res) => {
+        console.log("holli");
+        this.businessProfileService.searchBusinessProfile(res.data.id).then(res => {
+          this.businessId = res.data.id;
+          console.log(res.data);
+          this.requestService.getRequestsByBusinessId(res.data.id, "CREATED").then(result => {
+            this.requestsCompleted = result.data;
+          });
+          this.requestService.getRequestsByBusinessId(res.data.id, "IN_PROCESS").then(result => {
+            this.requestsInProcess = result.data;
+            console.log(this.requestsInProcess);
+          });
+          this.requestService.getRequestsByBusinessId(res.data.id, "PENDING").then(result => {
+            this.requestsPending = result.data;
+            console.log(this.requestsPending);
+          });
+          this.requestService.getRequestsByBusinessId(res.data.id, "CANCELED").then(result => {
+            this.requestsPending = result.data;
+          });
+        });
+      })
     }
   },
 }
@@ -77,8 +86,8 @@ export default {
             <div class="contentCardText">
               <p><b>Request created by </b> {{ item.userProfile.firstName }}</p>
               <div class="buttonsOpcion">
-                <Button icon="pi pi-check" label="Accept" @click="visibleAccepted = true" />
-                <Button icon="pi pi-times" severity="danger" label="Reject" @click="visibleReject = true" />
+                <Button icon="pi pi-check" label="Accept" @click="visibleAccepted = true; requestId = item.id" />
+                <Button icon="pi pi-times" severity="danger" label="Reject" @click="visibleReject = true; requestId = item.id" />
               </div>
             </div>
           </div>
