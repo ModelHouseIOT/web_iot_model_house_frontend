@@ -36,6 +36,7 @@ export default {
       this.requestService.updateRequest(this.requestId, { "status": "PENDING_PROPOSAL"}).then(result => {
         console.log(result)
       })
+      this.searchRequest();
       this.visibleAccepted = false;
       this.toast.add({ severity: 'success', summary: 'Request Accepted', detail: '', life: 3000 });
     },
@@ -43,6 +44,7 @@ export default {
       this.requestService.updateRequest(this.requestId, { "status": "CANCELED" }).then(result => {
         console.log(result)
       })
+      this.searchRequest();
       this.visibleReject = false;
       this.toast.add({ severity: 'error', summary: 'Request Reject', detail: '', life: 3000 });
     },
