@@ -8,9 +8,10 @@
     </section>
     <div class="card">
         <div v-for="business in businesses" :key="business.id" class="card-container-area" style="cursor:pointer">
-            <Card style="min-height: 300px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);" id="elevator">
+            <Card style="min-height: 250px;box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);" id="elevator">
               <template #header>
-                <img :src= "business.image" class="imgArea" alt="Remodeling a particular area of your house">
+                <img :src= "business.image" class="imgArea" alt="Remodeling a particular area of your house"
+                style="max-height: 250px;">
               </template>
               <template #title class="text-center"> {{business.name}}</template>
               <template #subtitle class="text-center">{{business.address}}</template>
@@ -20,7 +21,8 @@
               </template>
               <template #footer>
                 <div style="text-align: center">
-                  <RequestForm style="padding: 0px; margin: 0px;" :businessId="business.id"/>
+                  <RequestForm style="padding: 0px; margin: 0px;" :businessId="business.id"
+                               :businessName="business.name"/>
                   <Button class="button" @click="goIntoDetails(business.id)" icon="pi pi-caret-right" label="See More"
                           style="background-color:#004A63; border-color: #004A63;"/>
                 </div>
@@ -51,7 +53,7 @@ export default defineComponent({
         this.searchService = new BusinessListService();
         this.searchService.searchRemodeler().then(res=>{
             this.businesses = res.data;
-            console.log(res.data);
+            console.log(res.data ,"hola");
         });
         this.value = ref(null);
     },

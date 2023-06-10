@@ -21,8 +21,16 @@ import Paginator from 'primevue/paginator';
 import Galleria from 'primevue/galleria';
 import Rating from "primevue/rating";
 import Dialog from "primevue/dialog";
+import Badge from "primevue/badge";
+import BadgeDirective from "primevue/badgedirective";
+import Accordion from "primevue/accordion";
+import AccordionTab from "primevue/accordiontab";
+import TabView from "primevue/tabview";
+import TabPanel from "primevue/tabpanel";
+import TieredMenu from "primevue/tieredmenu";
 
 const app = createApp(App);
+app.directive('badge', BadgeDirective);
 app.use(router);
 app.use(PrimeVue);
 app.use(ToastService);
@@ -40,6 +48,12 @@ app.component('Galleria', Galleria);
 app.component('Rating', Rating);
 app.component('Dialog', Dialog);
 app.component('Textarea', Textarea);
+app.component('Badge', Badge);
+app.component('Accordion', Accordion);
+app.component('AccordionTab', AccordionTab);
+app.component('TabView', TabView);
+app.component('TabPanel', TabPanel);
+app.component('TieredMenu', TieredMenu);
 
 app.mount('#app');
 

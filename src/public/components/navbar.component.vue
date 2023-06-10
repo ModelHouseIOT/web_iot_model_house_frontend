@@ -14,40 +14,75 @@
                     <router-link to="/project">Your publish</router-link>
                 </li>
                 <li class="navbar-link">
+                  <router-link to="/request">Requests</router-link>
+                </li>
+                <li class="navbar-link">
                     <router-link to="/home">
-                        <i class="pi pi-bell" style="color: #708090"></i>
+<!--                        <i class="pi pi-bell" style="color: #708090"></i>-->
+                        <i v-badge="2" class="pi pi-bell p-overlay-badge"
+                           style="font-size: 1rem; color: #708090; p-badge: 50px;" />
                     </router-link>
                 </li>
                 <li class="navbar-link">
                     <router-link to="/home">
-                        <i class="pi pi-shopping-cart" style="color: #708090"></i>
+                        <i class="pi pi-heart" style="color: #708090"></i>
                     </router-link>
                 </li>
                 <li class="navbar-link" v-if='!this.account' >
                     <router-link to="/account">
-                        <i class="pi pi-user" style="color: #708090"></i>
+                        <i class="pi pi-user" style="color: #708090" @click="userToggle($event)"></i>
                     </router-link>
                 </li>
-                <li class="navbar-link sign-out" v-if='this.account' @click="signOut()">
-                    <i class="pi pi-sign-out" style="color: #708090"></i>
-                </li>
+              <li class="navbar-link sign-out" v-if='this.account' @click="signOut()">
+                <i class="pi pi-sign-out" style="color: #708090"></i>
+              </li>
             </ul>
         </nav>
     </header>
+  <TieredMenu style=" margin-top: 10px; width: 100px;" ref="menu" id="overlay_tmenu" :model="items" popup />
 
-    <router-view></router-view>
+  <router-view></router-view>
 </template>
 
 <script>
+
+import {ref} from "vue";
 
 export default {
     name: "navbar",
     data() {
         return {
-            account: false
+            account: false,
+            badgeValue: Number,
+            menu: null,
+            items: ref([
+            {
+              label: 'File',
+              icon: 'pi pi-fw pi-file',
+            },
+            {
+              label: 'Edit',
+              icon: 'pi pi-fw pi-pencil',
+
+            },
+            {
+              label: 'Users',
+              icon: 'pi pi-fw pi-user',
+            },
+            {
+              separator: true
+            },
+            {
+              label: 'Quit',
+              icon: 'pi pi-fw pi-power-off'
+            }
+          ]),
         }
     },
-    created() {
+  beforeCreate() {
+    this.badgeValue = 1;
+  },
+  created() {
         localStorage.getItem("account") ? this.account = localStorage.getItem("account"): null;
         console.log(this.account);
     },
@@ -56,13 +91,20 @@ export default {
           localStorage.removeItem("account");
           this.$router.push('/home');
           setInterval("location.reload()", 50);
-        }
+        },
+        userToggle(event) {
+          // Verifica que el TieredMenu esté definido antes de llamar a toggle
+          if (this.menu) {
+            this.menu.toggle(event);
+          }
+        },
     },
     mounted() {
         window.addEventListener("scroll", function (){
             const header = document.querySelector("header");
             header.classList.toggle("down",window.scrollY>0);
         });
+        this.menu = this.$refs.menu;
     }
 }
 
@@ -128,4 +170,5 @@ header .navbar ul li a i{
     position: relative;
     right: 20em;
 }
+
 </style>
