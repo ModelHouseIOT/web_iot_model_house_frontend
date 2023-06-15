@@ -9,6 +9,7 @@ import detail from "@/request-service-management/pages/business-detail.component
 import signIn from "@/identity-and-access-management/pages/sign-in.component.vue";
 import ProjectDetail from "@/request-service-management/pages/project-detail.component.vue";
 import Request from "@/request-service-management/pages/request.component.vue";
+import payment from "@/payment-and-subscription-management/pages/payment.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,6 +62,11 @@ const router = createRouter({
             path:"/request",
             name:"request",
             component:Request,
+        },
+        {
+            path:"/payment",
+            name:"payment",
+            component: payment,
         },
 
     ],
