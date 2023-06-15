@@ -16,6 +16,9 @@
                 <li class="navbar-link">
                   <router-link to="/request">Requests</router-link>
                 </li>
+              <li class="navbar-link">
+                <router-link to="/payment">Subscription</router-link>
+              </li>
                 <li class="navbar-link">
                     <router-link to="/home">
 <!--                        <i class="pi pi-bell" style="color: #708090"></i>-->
