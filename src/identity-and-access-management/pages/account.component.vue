@@ -24,9 +24,7 @@ export default {
 section{
     background: url("@/assets/account.png") no-repeat;
     background-size: cover;
-    min-height: 700px;
-    width: 100%;
-    height: 100%;
+    min-height: 100vh;
     display: grid;
     place-items: center;
     grid-template-columns: repeat(2, 1fr);

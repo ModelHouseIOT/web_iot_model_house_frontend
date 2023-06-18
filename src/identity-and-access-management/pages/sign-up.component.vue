@@ -27,12 +27,16 @@
                        :class="{'is-invalid': !confirmPasswordValid}" @input="validatePasswords"/>
             <div v-if="!passwordsMatch" class="invalid-feedback">Passwords do not match</div>
         </div>
-        <div class="text-down">
-          <div style="font-size: 12px;">
-            you are agreeing to our <a href="https://www.termsfeed.com/live/080d7040-ea41-438c-98a1-3f5c5eeb95f0"
+        <div class="text-down" style="font-size: 12px;">
+          <div>
+            You are agreeing to our <a href="https://www.termsfeed.com/live/080d7040-ea41-438c-98a1-3f5c5eeb95f0"
                                        target="_blank"><b><u style="cursor: pointer;">privacy policy</u></b></a>
             and <a href="https://www.termsfeed.com/live/a0ae1603-599a-4452-b149-e7c7223c77ae"
-                   target="_blank"><b><u style="cursor: pointer;">terms of service.</u></b></a></div>
+                   target="_blank"><b><u style="cursor: pointer;">terms of service.</u></b></a>
+          </div>
+          <div style="margin: 10px 0;">
+            Do you already have an account? <router-link to="sign-in" ><b>Sign in</b></router-link>
+          </div>
         </div>
         <div @click="registerUser">
             <Button label="REGISTER" style="background-color: #02AA8B;
@@ -99,6 +103,9 @@ export default {
 }
 </script>
 <style scoped>
+b{
+  color: black;
+}
 .is-invalid {
     border-color: red;
 }
@@ -112,7 +119,7 @@ h1{
     font-style: normal;
     line-height: 144px;
     padding: 0;
-    margin: 10px;
+    margin:2px;
 }
 .title-of-sign-up{
     font-size: 60px;
