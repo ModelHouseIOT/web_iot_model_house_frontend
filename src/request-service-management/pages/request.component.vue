@@ -17,6 +17,7 @@ export default {
       requestsCompleted: null,
       requestsInProcess: null,
       requestsPending: null,
+      requestsCanceled: null,
       businessId: null,
       visibleAccepted: ref(false),
       visibleReject: ref(false),
@@ -32,6 +33,9 @@ export default {
     }
   },
   methods: {
+    goToProposalForm(id){
+      this.$router.push("/proposal/" + id);
+    },
     onSubmitAccepted() {
       this.requestService.updateRequest(this.requestId, { "status": "PENDING_PROPOSAL"}).then(result => {
         console.log(result)
@@ -54,19 +58,25 @@ export default {
         this.businessProfileService.searchBusinessProfile(res.data.id).then(res => {
           this.businessId = res.data.id;
           console.log(res.data);
-          this.requestService.getRequestsByBusinessId(res.data.id, "CREATED").then(result => {
-            this.requestsCompleted = result.data;
-          });
-          this.requestService.getRequestsByBusinessId(res.data.id, "IN_PROCESS").then(result => {
-            this.requestsInProcess = result.data;
-            console.log(this.requestsInProcess);
-          });
+          // FIRST STATUS
           this.requestService.getRequestsByBusinessId(res.data.id, "PENDING").then(result => {
             this.requestsPending = result.data;
             console.log(this.requestsPending);
           });
+          // SECOND STATUS
+          this.requestService.getRequestsByBusinessId(res.data.id, "PENDING_PROPOSAL").then(result => {
+            this.requestsCompleted = result.data;
+            console.log(this.requestsCompleted);
+          });
+          // THIRD STATUS
+          this.requestService.getRequestsByBusinessId(res.data.id, "IN_PROCESS").then(result => {
+            this.requestsInProcess = result.data;
+            console.log(this.requestsInProcess);
+          });
+          // FOURTH STATUS
           this.requestService.getRequestsByBusinessId(res.data.id, "CANCELED").then(result => {
-            this.requestsPending = result.data;
+            this.requestsCanceled = result.data;
+            console.log(this.requestsCanceled);
           });
         });
       })
@@ -78,6 +88,7 @@ export default {
 
 <template>
   <TabView v-model:activeIndex="active" style="margin: 150px 50px 0px 50px;" >
+<!--    FIRST PANEL-->
     <TabPanel style="background-color: cornflowerblue; padding: 10px 15px;" header="RECENT REQUESTS" >
       <div class="cardRequest">
         <div v-for="(item, index) in this.requestsPending" :key="item.id" >
@@ -87,16 +98,18 @@ export default {
             </div>
             <div class="contentCardText">
               <p><b>Request created by </b> {{ item.userProfile.firstName }}</p>
-              <div class="buttonsOpcion">
-                <Button icon="pi pi-check" label="Accept" @click="visibleAccepted = true; requestId = item.id" />
-                <Button icon="pi pi-times" severity="danger" label="Reject" @click="visibleReject = true; requestId = item.id" />
+              <p>{{item.description}}</p>
+              <div class="buttonOptions">
+                <Button class="btn" icon="pi pi-check" label="Accept" @click="visibleAccepted = true; requestId = item.id" />
+                <Button class="btn" icon="pi pi-times" severity="danger" label="Reject" @click="visibleReject = true; requestId = item.id" />
               </div>
             </div>
           </div>
         </div>
       </div>
     </TabPanel>
-    <TabPanel style="background-color: yellowgreen; padding: 10px 15px;" header="COMING PROJECTS">
+<!--    SECOND PANEL-->
+    <TabPanel style="background-color: yellowgreen; padding: 10px 15px;" header="PENDING PROPOSALS">
       <div class="cardRequest">
           <div v-for="(item, index) in this.requestsCompleted" :key="item.id" >
             <div class="contentCard">
@@ -104,19 +117,19 @@ export default {
                 <img alt="user profile image" :src="item.userProfile.image" style="height:150px; width: 150px; border-radius: 50%;"/>
               </div>
               <div class="contentCardText">
-                <p><b>Request created by </b> {{ item.userProfile.firstName }}</p>
-                <div class="buttonsOpcion">
-                  <Button icon="pi pi-check" label="Accept" />
-                  <Button icon="pi pi-times" severity="danger" label="Reject" />
+                <p><b>Send proposal to </b> {{ item.userProfile.firstName }}</p>
+                <div>
+                  <Button icon="pi pi-file" label="CREATE PROPOSAL" @click="goToProposalForm(item.id)"/>
                 </div>
               </div>
             </div>
           </div>
         </div>
     </TabPanel>
+<!--    THIRD PANEL-->
     <TabPanel style="background-color: green; padding: 10px 15px;" header="IN PROCESS PROJECTS">
       <div class="cardRequest">
-          <div v-for="(item, index) in this.requestsInProcess" :key="item.id" >
+          <div v-for="(item, index) in this.requestsPending" :key="item.id" >
             <div class="contentCard">
               <div class="contentCardImg">
                 <img alt="user profile image" :src="item.userProfile.image" style="height:150px; width: 150px; border-radius: 50%;"/>
@@ -132,7 +145,24 @@ export default {
           </div>
         </div>
     </TabPanel>
+<!--    FOURTH PANEL-->
+    <TabPanel style="background-color: green; padding: 10px 15px;" header="PROJECTS CANCELED">
+      <div class="cardRequest">
+        <div v-for="(item, index) in this.requestsCanceled" :key="item.id" >
+          <div class="contentCard">
+            <div class="contentCardImg">
+              <img alt="user profile image" :src="item.userProfile.image" style="height:150px; width: 150px; border-radius: 50%;"/>
+            </div>
+            <div class="contentCardText">
+              <p><b>Request created by </b> {{ item.userProfile.firstName }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </TabPanel>
   </TabView>
+
+<!--  DIALOGS-->
   <Dialog v-model:visible="visibleAccepted" modal header="Are you sure?" :style="{ width: '20vw' }">
     <template #footer>
       <Button label="No" icon="pi pi-times" severity="danger" @click="visibleAccepted = false" text />
@@ -145,6 +175,9 @@ export default {
         <Button label="Yes" icon="pi pi-check" severity="danger" @click="onSubmitReject" autofocus />
       </template>
     </Dialog>
+
+
+<!--  TOASTS-->
   <Toast />
 </template>
 
@@ -165,20 +198,19 @@ export default {
   }
   .contentCard{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
-    border-radius: 8px; 
-    margin: auto;
-    margin-bottom: 30px;
+    border-radius: 8px;
+    margin: auto auto 30px;
   }
   .contentCardText{
     width: 90%;
     margin: auto;
     padding: 25px 0;
   }
-  .buttonsOpcion{
-    width: 80%;
-    margin: auto;
-    padding-top: 20px;
-    display: flex;
-    justify-content: space-between;
+  .buttonOptions{
+    display: inline-block;
+  }
+  .buttonOptions .btn{
+    display: inline-block;
+    margin: 0 3px;
   }
 </style>

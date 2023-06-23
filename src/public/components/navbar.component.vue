@@ -10,9 +10,9 @@
                 <li class="navbar-link">
                     <router-link to="/remodeler">Find Remodeler</router-link>
                 </li>
-                <li class="navbar-link">
-                    <router-link to="/project">Your publish</router-link>
-                </li>
+<!--                <li class="navbar-link">-->
+<!--                    <router-link to="/project">Your publish</router-link>-->
+<!--                </li>-->
                 <li class="navbar-link">
                   <router-link to="/request">Requests</router-link>
                 </li>
