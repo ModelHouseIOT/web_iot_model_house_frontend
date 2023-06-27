@@ -10,7 +10,7 @@ import signIn from "@/identity-and-access-management/pages/sign-in.component.vue
 import ProjectDetail from "@/request-service-management/pages/project-detail.component.vue";
 import Request from "@/request-service-management/pages/request.component.vue";
 import Proposal from "@/request-service-management/pages/proposal.component.vue";
-import Cart from "@/payment-and-subscription-management/pages/Cart.vue";
+import editProfileComponent from "@/identity-and-access-management/pages/edit-profile.component.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,15 +69,11 @@ const router = createRouter({
             name:"proposal",
             component:Proposal,
         },
-
-        /*  Payment and Subscription Related Routes */
-
         {
-            path:"/subscription",
-            name:"cart",
-            component: Cart
+            path:"/user/:id/user_profile",
+            name:"edit-profile",
+            component:editProfileComponent,
         },
-
     ],
 });
 export default router;
