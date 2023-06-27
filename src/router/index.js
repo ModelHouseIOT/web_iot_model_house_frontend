@@ -11,6 +11,9 @@ import ProjectDetail from "@/request-service-management/pages/project-detail.com
 import Request from "@/request-service-management/pages/request.component.vue";
 import Proposal from "@/request-service-management/pages/proposal.component.vue";
 import editProfileComponent from "@/identity-and-access-management/pages/edit-profile.component.vue";
+import ProjectUpdate from "@/request-service-management/pages/project-update.component.vue";
+import ProjectTracing from "@/request-service-management/pages/project-tracing.component.vue";
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +71,16 @@ const router = createRouter({
             path:"/proposal/:id",
             name:"proposal",
             component:Proposal,
+        },
+        {
+            path:"/project-update/:id",
+            name:"project-update",
+            component:ProjectUpdate,
+        },
+        {
+            path:"/project-tracing/:id",
+            name:"project-tracing",
+            component:ProjectTracing,
         },
         {
             path:"/user/:id/user_profile",

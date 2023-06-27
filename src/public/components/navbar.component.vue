@@ -13,9 +13,12 @@
 <!--                <li class="navbar-link">-->
 <!--                    <router-link to="/project">Your publish</router-link>-->
 <!--                </li>-->
-                <li class="navbar-link">
-                  <router-link to="/request">Requests</router-link>
+                <li class="navbar-link" v-if='this.accountData == "user"'>
+                  <router-link to="/request">MyRequests</router-link>
                 </li>
+              <li class="navbar-link" v-if='this.accountData == "business"'>
+                <router-link to="/request">Requests</router-link>
+              </li>
                 <li class="navbar-link">
                     <router-link to="/home">
 <!--                        <i class="pi pi-bell" style="color: #708090"></i>-->
@@ -59,6 +62,7 @@ export default {
     data() {
         return {
             account: false,
+            accountData: null,
             routeProfile: "",
             badgeValue: Number,
             menu: null,
@@ -93,7 +97,10 @@ export default {
         this.routeProfile = localStorage.getItem("account")? `/user/${JSON.parse(localStorage.getItem("account")).id}/user_profile`:"",
         localStorage.getItem("account") ? this.account = localStorage.getItem("account"): null;
         console.log(JSON.parse(this.account).id);
-    },
+
+        this.accountData = localStorage.getItem("account")? JSON.parse(localStorage.getItem("account")).role:null;
+        console.log(JSON.parse(this.account).role);
+  },
     methods:{
         signOut() {
           localStorage.removeItem("account");

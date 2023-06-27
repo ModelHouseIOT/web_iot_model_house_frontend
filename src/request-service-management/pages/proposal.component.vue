@@ -1,6 +1,7 @@
   <script>
   import {useField, useForm} from "vee-validate";
   import {ProposalService} from "@/request-service-management/service/proposal.service";
+  import {RequestService} from "@/request-service-management/service/request.service";
 
   export default {
     name: "Proposal",
@@ -19,10 +20,12 @@
         proposalService: null,
         requestId: null,
         proposalId: null,
+        requestService: null,
       }
     },
     created() {
       this.proposalService = new ProposalService();
+      this.requestService = new RequestService();
     },
     methods: {
       addActivity() {
@@ -70,6 +73,9 @@
             })
           });
         });
+          // this.requestService.updateRequest(this.requestId, { "status": "IN_PROCESS"}).then(result => {
+          //   console.log(result)
+          // })
         this.$router.push("/remodeler");
         });
 
