@@ -10,6 +10,7 @@ import signIn from "@/identity-and-access-management/pages/sign-in.component.vue
 import ProjectDetail from "@/request-service-management/pages/project-detail.component.vue";
 import Request from "@/request-service-management/pages/request.component.vue";
 import Proposal from "@/request-service-management/pages/proposal.component.vue";
+import editProfileComponent from "@/identity-and-access-management/pages/edit-profile.component.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,7 +69,11 @@ const router = createRouter({
             name:"proposal",
             component:Proposal,
         },
-
+        {
+            path:"/edit-profile",
+            name:"edit-profile",
+            component:editProfileComponent,
+        },
     ],
 });
 export default router;

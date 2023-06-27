@@ -28,6 +28,11 @@
                         <i class="pi pi-heart" style="color: #708090"></i>
                     </router-link>
                 </li>
+                <li class="navbar-link" v-if='this.account' >
+                  <router-link to="edit-profile">
+                    <i class="pi pi-pencil" style="color: #708090"></i>
+                  </router-link>
+                </li>
                 <li class="navbar-link" v-if='!this.account' >
                     <router-link to="/account">
                         <i class="pi pi-user" style="color: #708090" @click="userToggle($event)"></i>
@@ -36,6 +41,7 @@
               <li class="navbar-link sign-out" v-if='this.account' @click="signOut()">
                 <i class="pi pi-sign-out" style="color: #708090"></i>
               </li>
+
             </ul>
         </nav>
     </header>
