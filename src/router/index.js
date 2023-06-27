@@ -70,7 +70,7 @@ const router = createRouter({
             component:Proposal,
         },
         {
-            path:"/edit-profile",
+            path:"/user/:id/user_profile",
             name:"edit-profile",
             component:editProfileComponent,
         },

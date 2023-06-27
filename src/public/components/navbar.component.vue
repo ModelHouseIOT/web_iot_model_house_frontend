@@ -29,7 +29,7 @@
                     </router-link>
                 </li>
                 <li class="navbar-link" v-if='this.account' >
-                  <router-link to="edit-profile">
+                  <router-link :to= 'this.routeProfile'>
                     <i class="pi pi-pencil" style="color: #708090"></i>
                   </router-link>
                 </li>
@@ -59,6 +59,7 @@ export default {
     data() {
         return {
             account: false,
+            routeProfile: "",
             badgeValue: Number,
             menu: null,
             items: ref([
@@ -89,8 +90,9 @@ export default {
     this.badgeValue = 1;
   },
   created() {
+        this.routeProfile = localStorage.getItem("account")? `/user/${JSON.parse(localStorage.getItem("account")).id}/user_profile`:"",
         localStorage.getItem("account") ? this.account = localStorage.getItem("account"): null;
-        console.log(this.account);
+        console.log(JSON.parse(this.account).id);
     },
     methods:{
         signOut() {
