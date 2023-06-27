@@ -15,7 +15,7 @@
         value1: value1,
         errorMessage: errorMessage,
         activities: [''],
-        resources: [''],
+        resources: [{ resource: '', amount: 0 }],
         amounts: [''],
         proposalService: null,
         requestId: null,

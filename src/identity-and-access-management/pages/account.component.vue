@@ -22,8 +22,8 @@ export default {
     text-decoration: none;
 }
 section{
+  background: url("@/assets/account.png") no-repeat;
   background-size: cover;
-  background: url("@/assets/account.png") no-repeat center;
   height: 100vh;
   display: grid;
   place-items: center;

@@ -29,6 +29,7 @@ export default {
       status: null,
       proposalService: null,
       isProposalActive: false,
+      business: null,
     }
   },
   created() {
@@ -113,6 +114,7 @@ export default {
       this.accountService.accountByUserId(JSON.parse(localStorage.getItem("account")).id).then((res) => {
         this.userProfileService.searchUserProfile(res.data.id).then(res => {
           this.businessId = res.data.id;
+          this.business = res.data.name;
           console.log(res.data);
           // FIRST STATUS
           this.requestService.getRequestsByUserId(res.data.id, "PENDING").then(result => {
@@ -158,8 +160,8 @@ export default {
                 {{ item.userProfile.firstName }}
               </p>
               <p v-if="this.accountRole == 'user'">
-                <b >Request created by </b>
-                YOU
+                <b>Request sent to </b>
+                {{item.businessProfile.name}}
               </p>
               <p>{{item.description}}</p>
               <div v-if="this.accountRole == 'business'" class="buttonOptions">
@@ -185,8 +187,8 @@ export default {
                   {{ item.userProfile.firstName }}
                 </p>
                 <p v-if="this.accountRole == 'user'">
-                  <b >Request created by </b>
-                  YOU
+                  <b>Request sent to </b>
+                  {{item.businessProfile.name}}
                 </p>
                 <p>{{item.description}}</p>
 
@@ -217,11 +219,11 @@ export default {
                   {{ item.userProfile.firstName }}
                 </p>
                 <p v-if="this.accountRole == 'user'">
-                  <b >Request created by </b>
-                  YOU
+                  <b>Request sent to </b>
+                  {{item.businessProfile.name}}
                 </p>
                 <Button v-if="this.accountRole=='business'" icon="pi pi-file" label="UPDATE PROJECT" @click="goToProjectForm(item.id)"/>
-                <Button v-if="this.accountRole=='user'" icon="pi pi-file" label="READ PROJECT" @click="goToProjectTracingForm(item.id)"/>
+                <Button v-if="this.accountRole=='user'" icon="pi pi-file" label="FOLLOW PROJECT" @click="goToProjectTracingForm(item.id)"/>
 
               </div>
             </div>
@@ -242,8 +244,8 @@ export default {
                 {{ item.userProfile.firstName }}
               </p>
               <p v-if="this.accountRole == 'user'">
-                <b >Request created by </b>
-                YOU
+                <b>Request sent to </b>
+                {{item.businessProfile.name}}
               </p>
               <p>{{item.description}}</p>
             </div>
