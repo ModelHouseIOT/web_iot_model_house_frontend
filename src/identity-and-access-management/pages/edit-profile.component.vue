@@ -63,34 +63,16 @@
 
         <div class="section">
           <div class="item">
-            <div class="label">Email</div>
+            <div class="label">Gender</div>
             <div class="value">
-              <template v-if="!editMode.email">
-                {{ formData.email }}
-                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('email')" outlined></Button>
+              <template v-if="!editMode.gender">
+                {{ formData.gender }}
+                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('gender')" outlined></Button>
               </template>
               <template v-else>
-                <InputText v-model="formData.email" type="text" class="p-inputtext-sm" placeholder="Small" />
-                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('email')"/>
-                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('email')"/>
-              </template>
-            </div>
-          </div>
-          <Divider type="solid" />
-        </div>
-
-        <div class="section">
-          <div class="item">
-            <div class="label">District</div>
-            <div class="value">
-              <template v-if="!editMode.district">
-                {{ formData.district }}
-                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('district')" outlined></Button>
-              </template>
-              <template v-else>
-                <InputText v-model="formData.district" type="text" class="p-inputtext-sm" placeholder="Small" />
-                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('district')"/>
-                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('district')"/>
+                <InputText v-model="formData.gender" type="text" class="p-inputtext-sm" placeholder="Small" />
+                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('gender')"/>
+                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('gender')"/>
               </template>
             </div>
           </div>
@@ -119,6 +101,9 @@
 </template>
 
 <script>
+import {AccountService} from "@/request-service-management/service/account-service";
+import {EditProfileService} from "@/identity-and-access-management/service/edit-profile.service";
+
 export default {
   data() {
     return {
@@ -126,23 +111,28 @@ export default {
         photo: false,
         name: false,
         lastName: false,
-        email: false,
-        district: false,
+        gender: false,
         phone: false,
       },
       formData: {
-        photo:
-            localStorage.getItem('profilePhoto') ||
-            'https://www.webconsultas.com/sites/default/files/styles/wc_adaptive_image__small/public/articulos/perfil-resilencia.jpg',
-        name: 'Luis',
-        lastName: 'Li',
-        email: 'lrlitang18@gmail.com',
-        district: 'San Borja',
-        phone: '984 014 947',
+        photo: "",
+        name: "",
+        lastName: "",
+        gender: "",
+        phone: "",
       },
+      accountService: null,
+      editProfileService: null,
       originalData: {},
     };
   },
+  created() {
+    this.editProfileService = new EditProfileService();
+    this.editProfileService.profileByUserId(this.$route.params.id).then(res=> {
+      this.formData = res.data;
+    })
+  },
+
   methods: {
     toggleEdit(field) {
       this.editMode[field] = !this.editMode[field];
@@ -152,14 +142,17 @@ export default {
     },
     saveChanges(field) {
       this.toggleEdit(field);
-      localStorage.setItem('profileData', JSON.stringify(this.formData));
+      console.log(JSON.stringify(this.formData))
+      this.editProfileService.updateProfileByUserId(this.$route.params.id, JSON.stringify(this.formData)).then(response=>{
+        console.log(response)
+      })
     },
     cancelChanges(field) {
       this.toggleEdit(field);
       if (this.originalData[field] !== undefined) {
         this.formData[field] = this.originalData[field];
       } else {
-        this.formData[field] = null; // Establece un valor predeterminado si no hay un valor original
+        this.formData[field] = null;
       }
     },
   },
