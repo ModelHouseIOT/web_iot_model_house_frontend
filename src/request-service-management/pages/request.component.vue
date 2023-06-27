@@ -188,12 +188,13 @@ export default {
                   <b >Request created by </b>
                   YOU
                 </p>
+                <p>{{item.description}}</p>
 
                 <Button v-if="this.accountRole=='business'" icon="pi pi-file" label="CREATE PROPOSAL" @click="goToProposalForm(item.id)"/>
                 <Button v-if="this.accountRole=='user'" icon="pi pi-file" label="READ PROPOSAL" @click="goToProjectForm(item.id)"/>
 
                 <br><br>
-                <div class="buttonOptions" v-if="this.accountRole=='user' && this.isProposalActive">
+                <div class="buttonOptions" v-if="this.accountRole=='user'">
                   <Button class="btn" icon="pi pi-check" label="Accept" @click="visibleAccepted = true; requestId = item.id; changeStatus('IN_PROCESS')" />
                   <Button class="btn" icon="pi pi-times" severity="danger" label="Reject" @click="visibleReject = true; requestId = item.id; changeStatus('CANCELED')" />
                 </div>

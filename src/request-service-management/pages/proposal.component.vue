@@ -35,12 +35,10 @@
         this.activities.splice(index, 1);
       },
       addResource() {
-        this.resources.push('');
-        this.amounts.push('');
+        this.resources.push({ resource: '', amount: 0 });
       },
       removeResource(index) {
         this.resources.splice(index, 1);
-        this.amounts.splice(index, 1);
       },
       submitProposal(){;
         this.requestId = this.$route.params.id;
@@ -54,19 +52,19 @@
         this.proposalService.getProposal(this.requestId).then(res=>{
           this.proposalId = res.data.id;
           console.log("PROPOSAL ID: ", this.proposalId);
-          this.activities.map(res=>{
+          this.activities.map(activity=>{
             this.proposalService.createProjectActivity(this.proposalId, {
               "status": "PENDING",
               "name": "-",
-              "description": res,
+              "description": activity,
             }).then(result=>{
               console.log("ACTIVITY: ", result);
             })
           });
-          this.resources.map(res=>{
+          this.resources.map(resource =>{
             this.proposalService.createProjectResource(this.proposalId, {
-              "description": res,
-              "quantity": 0,
+              "description": resource.resource,
+              "quantity": resource.amount,
               "state": "string"
             }).then(result=>{
               console.log("RESOURCE: ", result);
@@ -117,7 +115,7 @@
         <br>
         <br>
           <div v-for="(activity, index) in activities" :key="index">
-            <InputText style="width: 144vh;" type="text" v-model="this.activity" placeholder="activity"></InputText>
+            <InputText style="width: 144vh;" type="text" v-model="this.activities[index]" placeholder="activity"></InputText>
 
             <Button class="space" @click="removeActivity(index)" icon="pi pi-trash" severity="danger" rounded/>
 
@@ -130,8 +128,8 @@
         <br>
         <br>
         <div v-for="(resource, index) in resources" :key="index">
-          <InputText style="width: 110vh; margin-right: 20px;" type="text" v-model="this.resource" placeholder="resource"></InputText>
-          <InputNumber type="text" v-model="this.resource" placeholder="amount"></InputNumber>
+          <InputText style="width: 110vh; margin-right: 20px;" type="text" v-model="this.resources[index].resource" placeholder="resource"></InputText>
+          <InputNumber type="text" v-model="this.resources[index].amount" placeholder="amount"></InputNumber>
           <Button class="space" @click="removeResource(index)" icon="pi pi-trash" severity="danger" rounded/>
           <br><br>
         </div>

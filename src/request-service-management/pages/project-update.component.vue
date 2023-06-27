@@ -53,8 +53,11 @@ export default {
       <br>
       <br>
       <div v-for="(activity, index) in activities" :key="index">
-        <p>{{activities.description}}</p>
-        <Button class="space" @click="removeActivity(index)" icon="pi pi-trash" severity="danger" rounded/>
+
+        <div style="display: flex; justify-content: space-between;">
+          <p> <b>{{index+1}}.- </b> {{activity.description}}</p>
+          <Button class="space"  icon="pi pi-check" rounded/>
+        </div>
 
         <br><br>
       </div>
@@ -64,16 +67,13 @@ export default {
       <br>
       <br>
       <div v-for="(resource, index) in resources" :key="index">
-        <h3>Resource</h3>
-        <p>{{resources.description}}</p>
-        <h3>Amount</h3>
-        <p>{{resources.quantity}}</p>
-        <Button class="space" @click="removeResource(index)" icon="pi pi-trash" severity="danger" rounded/>
+        <div style="display: flex; justify-content: space-between;">
+          <p> <b>Resource: </b> {{resource.description}}</p>
+          <p> <b>Amount: </b> {{resource.quantity}}</p>
+          <Button class="space"  icon="pi pi-check"  rounded/>
+        </div>
         <br><br>
       </div>
-
-      <Button type="submit" label="Submit" style="background-color:#02AA8B; border-color: #02AA8B;
-              margin-top: 30px; width: 30%;" @click="submitProposal"/>
     </form>
   </div>
 </template>

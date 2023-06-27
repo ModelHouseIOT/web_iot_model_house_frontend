@@ -11,6 +11,9 @@ import ProjectDetail from "@/request-service-management/pages/project-detail.com
 import Request from "@/request-service-management/pages/request.component.vue";
 import Proposal from "@/request-service-management/pages/proposal.component.vue";
 import Cart from "@/payment-and-subscription-management/pages/Cart.vue";
+import ProjectUpdateComponent from "@/request-service-management/pages/project-update.component.vue";
+import ProjectTracingComponent from "@/request-service-management/pages/project-tracing.component.vue";
+import editProfileComponent from "@/identity-and-access-management/pages/edit-profile.component.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +71,21 @@ const router = createRouter({
             path:"/proposal/:id",
             name:"proposal",
             component:Proposal,
+        },
+        {
+            path:"/project-update/:id",
+            name:"project-update",
+            component:ProjectUpdateComponent,
+        },
+        {
+            path:"/project-tracing/:id",
+            name:"project-tracing",
+            component:ProjectTracingComponent,
+        },
+        {
+            path:"/user/:id/user_profile",
+            name:"edit-profile",
+            component:editProfileComponent,
         },
 
         /*  Payment and Subscription Related Routes */
