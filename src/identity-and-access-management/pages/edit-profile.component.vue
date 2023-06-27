@@ -94,7 +94,9 @@
               </template>
             </div>
           </div>
+          <Divider type="solid" />
         </div>
+
         <Button>
           <li class="navbar-link">
             <router-link to="/subscription">Subscribe</router-link>
