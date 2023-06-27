@@ -29,6 +29,7 @@ import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
 import TieredMenu from "primevue/tieredmenu";
 import Divider from "primevue/divider";
+import ProgressBar from "primevue/progressbar";
 
 const app = createApp(App);
 app.directive('badge', BadgeDirective);
@@ -56,6 +57,7 @@ app.component('TabView', TabView);
 app.component('TabPanel', TabPanel);
 app.component('TieredMenu', TieredMenu);
 app.component("Divider", Divider);
+app.component("ProgressBar", ProgressBar);
 
 app.mount('#app');
 
