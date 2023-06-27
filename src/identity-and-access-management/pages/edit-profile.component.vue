@@ -95,9 +95,15 @@
             </div>
           </div>
         </div>
+        <Button>
+          <li class="navbar-link">
+            <router-link to="/subscription">Subscribe</router-link>
+          </li>
+        </Button>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>

@@ -10,6 +10,9 @@ import signIn from "@/identity-and-access-management/pages/sign-in.component.vue
 import ProjectDetail from "@/request-service-management/pages/project-detail.component.vue";
 import Request from "@/request-service-management/pages/request.component.vue";
 import Proposal from "@/request-service-management/pages/proposal.component.vue";
+import Cart from "@/payment-and-subscription-management/pages/Cart.vue";
+import ProjectUpdateComponent from "@/request-service-management/pages/project-update.component.vue";
+import ProjectTracingComponent from "@/request-service-management/pages/project-tracing.component.vue";
 import editProfileComponent from "@/identity-and-access-management/pages/edit-profile.component.vue";
 
 const router = createRouter({
@@ -70,10 +73,29 @@ const router = createRouter({
             component:Proposal,
         },
         {
+            path:"/project-update/:id",
+            name:"project-update",
+            component:ProjectUpdateComponent,
+        },
+        {
+            path:"/project-tracing/:id",
+            name:"project-tracing",
+            component:ProjectTracingComponent,
+        },
+        {
             path:"/user/:id/user_profile",
             name:"edit-profile",
             component:editProfileComponent,
         },
+
+        /*  Payment and Subscription Related Routes */
+
+        {
+            path:"/subscription",
+            name:"cart",
+            component: Cart
+        },
+
     ],
 });
 export default router;
