@@ -58,6 +58,7 @@ app.component('TabPanel', TabPanel);
 app.component('TieredMenu', TieredMenu);
 app.component("Divider", Divider);
 app.component("ProgressBar", ProgressBar);
+app.component("Image", Image);
 
 app.mount('#app');
 

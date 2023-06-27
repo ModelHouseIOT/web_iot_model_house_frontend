@@ -7,17 +7,17 @@
           <div class="item">
             <div class="label">Photo</div>
             <div class="value">
-              <template v-if="editMode.photo">
+              <template v-if="editMode.image">
                 <div>
-                  <InputText v-model="formData.photo" type="text" class="p-inputtext-sm" placeholder="Small" />
-                  <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('photo')"/>
-                  <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('photo')"/>
+                  <InputText v-model="formData.image" type="text" class="p-inputtext-sm" placeholder="Small" />
+                  <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('image')"/>
+                  <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('image')"/>
                 </div>
               </template>
               <template v-else>
-                <div class="photo-container">
-                  <Image :src="formData.photo" alt="Profile Photo" preview/>
-                  <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('photo')" outlined></Button>
+                <div class="image-container">
+                  <Image :src="formData.image" alt="Profile image" preview/>
+                  <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('image')" outlined></Button>
                 </div>
               </template>
             </div>
@@ -29,14 +29,14 @@
           <div class="item">
             <div class="label">Name</div>
             <div class="value">
-              <template v-if="!editMode.name">
-                {{ formData.name }}
-                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('name')" outlined></Button>
+              <template v-if="!editMode.firstName">
+                {{ formData.firstName }}
+                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('firstName')" outlined></Button>
               </template>
               <template v-else>
-                <InputText v-model="formData.name" type="text" class="p-inputtext-sm" placeholder="Small" />
-                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('name')"/>
-                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('name')"/>
+                <InputText v-model="formData.firstName" type="text" class="p-inputtext-sm" placeholder="Small" />
+                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('firstName')"/>
+                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('firstName')"/>
               </template>
             </div>
           </div>
@@ -83,14 +83,14 @@
           <div class="item">
             <div class="label">Phone</div>
             <div class="value">
-              <template v-if="!editMode.phone">
-                {{ formData.phone }}
-                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('phone')" outlined></Button>
+              <template v-if="!editMode.phoneNumber">
+                {{ formData.phoneNumber }}
+                <Button class="editButton" label="Edit" size="small" severity="secondary" @click="toggleEdit('phoneNumber')" outlined></Button>
               </template>
               <template v-else>
-                <InputText v-model="formData.phone" type="text" class="p-inputtext-sm" placeholder="Small" />
-                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('phone')"/>
-                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('phone')"/>
+                <InputText v-model="formData.phoneNumber" type="text" class="p-inputtext-sm" placeholder="Small" />
+                <Button class="cancelButton" size="small" icon="pi pi-times" severity="danger" rounded aria-label="Cancel" @click="cancelChanges('phoneNumber')"/>
+                <Button class="confirmButton" size="small" icon="pi pi-check" severity="success" rounded aria-label="Filter" @click="saveChanges('phoneNumber')"/>
               </template>
             </div>
           </div>
@@ -98,8 +98,8 @@
         </div>
 
         <Button>
-          <li class="navbar-link">
-            <router-link to="/subscription">Subscribe</router-link>
+          <li class="navbar-link" style="list-style: none">
+            <router-link to="/subscription" style="text-decoration: none; color: #fff">Subscribe</router-link>
           </li>
         </Button>
       </div>
@@ -116,18 +116,18 @@ export default {
   data() {
     return {
       editMode: {
-        photo: false,
-        name: false,
+        image: false,
+        firstName: false,
         lastName: false,
         gender: false,
-        phone: false,
-      },
+            phoneNumber: false,
+        },
       formData: {
-        photo: "",
-        name: "",
+        image: "",
+        firstName: "",
         lastName: "",
         gender: "",
-        phone: "",
+        phoneNumber: "",
       },
       accountService: null,
       editProfileService: null,
@@ -138,6 +138,7 @@ export default {
     this.editProfileService = new EditProfileService();
     this.editProfileService.profileByUserId(this.$route.params.id).then(res=> {
       this.formData = res.data;
+      console.log(this.formData.image);
     })
   },
 
@@ -151,7 +152,7 @@ export default {
     saveChanges(field) {
       this.toggleEdit(field);
       console.log(JSON.stringify(this.formData))
-      this.editProfileService.updateProfileByUserId(this.$route.params.id, JSON.stringify(this.formData)).then(response=>{
+      this.editProfileService.updateProfileByUserId(this.$route.params.id, JSON.stringify(this.formData), this.formData).then(response=>{
         console.log(response)
       })
     },
@@ -223,13 +224,13 @@ export default {
   cursor: pointer;
 }
 
-.photo-container {
+.image-container {
   display: flex;
   align-items: center;
   justify-items: center;
 }
 
-.photo-container img {
+.image-container img {
   max-width: 100%;
   max-height: 200px;
   object-fit: contain;
