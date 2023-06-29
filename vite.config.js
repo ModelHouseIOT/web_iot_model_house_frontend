@@ -10,5 +10,11 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
+  },
+  build: {
+    rollupOptions: {
+      external: ['ModelHouseOfficialLogo.png',
+      'banner.png','src/assets/area_card.png', 'src/assets/room_card.png', 'src/identity-and-access-management']
+    }
   }
 })
