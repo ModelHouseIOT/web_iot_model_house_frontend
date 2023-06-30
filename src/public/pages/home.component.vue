@@ -27,7 +27,6 @@
                 <Card>
                     <template #footer class="text-center"	> AREA </template>
                     <template #content>
-                        <img src="src/assets/area_card.png" class="imgArea" alt="Remodeling a particular area of your house">
                     </template>
                 </Card>
             </div>
@@ -35,7 +34,6 @@
                 <Card>
                     <template #footer > ROOM </template>
                     <template #content >
-                        <img src="src/assets/room_card.png" class="imgRoom" alt="Remodeling a house view on a laptop">
 
                     </template>
                 </Card>
@@ -44,7 +42,6 @@
                 <Card>
                     <template #footer > SERVICE </template>
                     <template #content>
-                        <img src="@/assets/service_card.png" class="imgService" alt="Service">
                     </template>
                 </Card>
             </div>

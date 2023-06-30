@@ -18,4 +18,10 @@ export class ProposalService {
     getProjectResource(proposalId){
         return http.get(`/proposal/${proposalId}/project_resource`);
     }
+    updateProjectActivity(id, data){
+        return http.put(`/project_activity/${id}`, data);
+    }
+    updateProjectResource(id, data){
+        return http.put(`/project_resource/${id}`, data);
+    }
 }

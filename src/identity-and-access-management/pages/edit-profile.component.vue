@@ -120,7 +120,7 @@ export default {
         firstName: false,
         lastName: false,
         gender: false,
-            phoneNumber: false,
+        phoneNumber: false,
         },
       formData: {
         image: "",
